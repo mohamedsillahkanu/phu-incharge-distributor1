@@ -640,14 +640,16 @@ async function loadUsers() {
     const res = await fetch('users.csv');
     if (!res.ok) throw new Error('users.csv not found (HTTP ' + res.status + ')');
     const text = await res.text();
-    users = Papa.parse(text, { header: true, skipEmptyLines: true }).data;
+    users = Papa.parse(text, { header: true, skipEmptyLines: true }).data
+        .map(u => Object.fromEntries(Object.entries(u).map(([k,v])=>[k.trim(),(v||'').trim()])));
 }
 
 async function loadSchools() {
     const res = await fetch('schools.csv');
     if (!res.ok) throw new Error('schools.csv not found (HTTP ' + res.status + ')');
     const text = await res.text();
-    schools = Papa.parse(text, { header: true, skipEmptyLines: true }).data;
+    schools = Papa.parse(text, { header: true, skipEmptyLines: true }).data
+        .map(s => Object.fromEntries(Object.entries(s).map(([k,v])=>[k.trim(),(v||'').trim()])));
     // normalise target_pupils to number
     schools.forEach(s => { s.target_pupils = parseInt(s.target_pupils) || 0; });
 }
@@ -671,7 +673,8 @@ document.getElementById('loginUser').addEventListener('keydown', e => { if(e.key
 
 function doLogin() {
     const val = document.getElementById('loginUser').value.trim();
-    const user = users.find(u => u.username === val && u.role === 'PHU Incharge');
+    const val2 = val.trim();
+    const user = users.find(u => u.username === val2 && u.role === 'PHU Incharge');
     if (!user) { loginErr('Invalid username or not a PHU Incharge'); return; }
 
     currentStaff = user;
@@ -855,7 +858,7 @@ document.getElementById('distCode').addEventListener('keydown', e => {
 
 function verifyDist(code) {
     // Match by username (the secret code) and role Distributor
-    const dist = users.find(u => u.username === code && u.role === 'Distributor');
+    const dist = users.find(u => u.username === code.trim() && u.role === 'Distributor');
     if (!dist) { showToast('Invalid distributor code', 'err'); return; }
 
     verifiedDist = dist;
