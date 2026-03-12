@@ -1,0 +1,9 @@
+username,full_name,role,district,chiefdom,phu,phone
+phuincharge01,Aminata Koroma,PHU Incharge,Bo,Badjia,Badjia PHU,+232-76-000001
+phuincharge02,Mohamed Kamara,PHU Incharge,Bo,Bagbe,Bagbe PHU,+232-76-000002
+phuincharge03,Fatmata Conteh,PHU Incharge,Kenema,Dama,Dama PHU,+232-76-000003
+dist_alpha,James Sesay,Distributor,Bo,Badjia,,+232-76-100001
+dist_bravo,Ibrahim Bangura,Distributor,Bo,Badjia,,+232-76-100002
+dist_charlie,Hawa Mansaray,Distributor,Bo,Bagbe,,+232-76-100003
+dist_delta,Abdul Turay,Distributor,Kenema,Dama,,+232-76-100004
+dist_echo,Mariama Jalloh,Distributor,Bo,Badjia,,+232-76-100005
